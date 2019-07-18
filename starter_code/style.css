@@ -1,0 +1,41 @@
+nav > a > img {
+  width: 70px;
+}
+
+#game > img {
+  width: 775px;
+  margin: 0 0 15px;
+}
+
+#board {
+  border: 1px solid black;
+  border-radius: 5px;
+  background: black;
+  width: 750px;
+  height: 300px;
+  margin: 0 auto;
+}
+
+#board > p {
+  color: green;
+  text-align: start;
+  margin: 20px;
+}
+
+#what > h1 {
+  font-size: 2em;
+  margin: 20px auto 10px;
+}
+
+.btn {
+  width: 250px;
+}
+
+#instrucoes, #desenvolvedora, #contato {
+  width: 750px;
+  margin: 50px auto;
+}
+
+#instrucoes > h1 {
+  margin-bottom: 20px;
+}
