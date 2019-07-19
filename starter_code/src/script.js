@@ -1,8 +1,10 @@
-// HTML functions
-
+// DOM -----------------------------------------------------
 const history = document.getElementById('history');
 const options = document.getElementById('options');
 const board = document.getElementById('board');
+
+
+// HTML functions -----------------------------------------
 const buffer = [];
 let isPrinting = false;
 
@@ -26,9 +28,8 @@ function printBuffer() {
     history.innerHTML += '<br>';
     clearInterval(intervalId);
     isPrinting = false;
-    // updateScroll();
-    printBuffer();    
-  }, 100);
+    printBuffer();
+  }, 60);
 }
 
 function print(phrase) {
@@ -36,8 +37,6 @@ function print(phrase) {
   printBuffer();
 }
 
-// print('essa é uma mensagem teste.');
-// print('essa mensagem deveria ser printada na linha debaixo.');
 
 function optionsBtn(optionsArray) {
   options.innerHTML = '';
@@ -45,58 +44,83 @@ function optionsBtn(optionsArray) {
   optionsArray.forEach((element) => {
     let option = document.createElement('button');
     option.type = 'button';
-    option.classList.add('btn', 'btn-success', 'col-12', 'col-md-2');
+    option.classList.add('btn', 'btn-outline-success', 'col-12', 'col-md-3');
     option.textContent = element.text || '';
     option.onclick = () => {
       element.callback(option);
-      // option.setAttribute("disabled", "disabled");
-      // options.innerHTML = '';
-    }; 
-
+      // option.setAttribute("disabled", "disabled"); ------ DELETAR ------
+      // options.innerHTML = ''; ------ DELETAR ------
+    };
     options.appendChild(option);
   });
-} 
+}
+
+let scrolled = false;
+function updateScroll() {
+  if (!scrolled) {
+    board.scrollTop = board.scrollHeight;
+    scrolled = false;
+  }
+}
+
+setInterval(updateScroll, 100);
+
+// board.onscroll = function() {
+//   scrolled=true;
+// };
 
 
-// Game functions
-
-let days = 0;
-
-const gameDificulties = [
-  {
-  dificulty: 'easy',
-  rollCheck: 12,
-  enemyLife: 10,
-  enemyWeapon: 'cimitarra',
-  enemyDiceAttack: 6,
-  habilityChances: 3,
+// Game levels ----------------------------------------------
+const gameDificulties = {
+  easy: {
+    dificulty: 'easy',
+    rollCheck: 12,
+    enemyhitPoints: 10,
+    enemyWeapon: 'cimitarra',
+    enemyDiceAttack: 6,
+    habilityChances: 3,
   },
-  {
+  medium: {
     dificulty: 'medium',
     rollCheck: 14,
-    enemyLife: 14,
+    enemyhitPoints: 14,
     enemyWeapon: 'espada longa',
     enemyDiceAttack: 8,
     habilityChances: 2,
   },
-  {
-  dificulty: 'hard',
-  rollCheck: 16,
-  enemyLife: 18,
-  enemyWeapon: 'machado grande',
-  enemyDiceAttack: 12,
-  habilityChances: 1,
+  hard: {
+    dificulty: 'hard',
+    rollCheck: 16,
+    enemyhitPoints: 18,
+    enemyWeapon: 'machado grande',
+    enemyDiceAttack: 12,
+    habilityChances: 1,
   },
-]
+};
 
-let gameDificulty = {
-  dificulty: 'easy',
-  rollCheck: 12,
-  enemyLife: 10,
-  enemyWeapon: 'cimitarra',
-  enemyDiceAttack: 6,
-  habilityChances: 3,
-  }
+let gameDificulty = gameDificulties.easy;
+
+function easyGame() {
+  gameDificulty = gameDificulties.easy;
+  print('Modo fácil escolhido.');
+  begin();
+}
+
+function mediumGame() {
+  gameDificulty = gameDificulties.medium;
+  print('Modo médio escolhido.');
+  begin();
+}
+
+function hardGame() {
+  gameDificulty = gameDificulties.hard;
+  print('Modo difícil escolhido.');
+  begin();
+}
+
+
+// Game functions ------------------------------------------
+let days = 0;
 
 function rollDice(sides) {
   const roll = Math.ceil(Math.random() * sides);
@@ -105,37 +129,29 @@ function rollDice(sides) {
 }
 
 function d20Check() {
-  const roll = rollDice(20)
-  const dificulty = gameDificulty.rollCheck
-  const check = roll >= dificulty 
-
-  // roll === 1 ? print('Você falhou miseravelmente.') : roll === 20 ? print('Uau! Um crítico. Você foi fenomenal!') : check ? print('Você passou no teste.') : print('Não foi dessa vez.')
+  const roll = rollDice(20);
+  const dificulty = gameDificulty.rollCheck;
+  const check = roll >= dificulty;
 
   if (roll === 1) {
-    print('Falhou miseravelmente.')
-    return 'fail'
-  } 
-  
+    print('Falhou miseravelmente.');
+    return 'fail';
+  }
+
   if (roll === 20) {
-    print('Uau! Um crítico. Fenomenal!')
-    return 'critical'
-  }   
-  // else {
-  //   check ? print('Acertou.') : print('Não foi dessa vez.')
-  // }
-   
-  return check
+    print('Uau! Um crítico. Fenomenal!');
+    return 'critical';
+  }
+
+  return check;
 }
 
-// console.log(d20Check())
 
-
-// Classes
-
+// Classes --------------------------------------------------
 class Character {
-  constructor(name, health, diceAttack, weapon) {
+  constructor(name, hitPoints, diceAttack, weapon) {
     this.name = name;
-    this.health = health;
+    this.hitPoints = hitPoints;
     this.diceAttack = diceAttack;
     this.weapon = weapon;
     this.life = true;
@@ -157,8 +173,9 @@ class Character {
     }
 
     if (check === true) {
-      print(`${this.name} acertou o golpe com ${this.weapon}.`);
+      print(`${this.name} acertou o golpe de ${this.weapon}.`);
       return rollDice(this.diceAttack);
+    // eslint-disable-next-line no-else-return
     } else {
       print('Não foi dessa vez.');
       return false;
@@ -166,8 +183,8 @@ class Character {
   }
 
   receiveDamage(damage) {
-    if (damage) this.health -= damage;
-    if (this.health < 1) this.life = false;
+    if (damage) this.hitPoints -= damage;
+    if (this.hitPoints < 1) this.life = false;
     this.life ? print(`${this.name} recebeu ${damage} ponto(s) de dano.`) : print(`${this.name} levou um golpe mortal.`);
     return damage;
   }
@@ -180,34 +197,40 @@ class Character {
         print(`${this.name} passou no teste.`);
         this.habilityChances = gameDificulty.habilityChances;
       } else {
-        this.habilityChances--
+        this.habilityChances--;
         print('Não foi dessa vez.');
       }
     } else {
       print(`${this.name} se esforçou muito e por fim acabou desistindo, mas voltou no dia seguinte para tentar novamente.`);
       this.habilityChances = gameDificulty.habilityChances;
     }
-
     return check;
   }
 }
 
-const player = new Character('Julia', 10, 8, 'rapieira')
-const enemy = new Character('Sequestrador', gameDificulty.enemyLife, gameDificulty.enemyDiceAttack, gameDificulty.enemyWeapon)
-// player.attack();
-// player.hability()
-// console.log(player.habilityChances)
+let player = new Character('Ariel', 10, 8, 'rapieira');
+let enemy = new Character('Sequestrador', gameDificulty.enemyhitPoints, gameDificulty.enemyDiceAttack, gameDificulty.enemyWeapon);
+let daughter = new Character('Beatrice', 10, 4, 'adaga');
 
-let scrolled = false;
-function updateScroll(){
-    if(!scrolled){
-        board.scrollTop = board.scrollHeight;
-        scrolled = false;
-    }
+
+// Start Game ----------------------------------------------
+function start() {
+  player = new Character('Ariel', 10, 8, 'rapieira');
+  enemy = new Character('Sequestrador', gameDificulty.enemyhitPoints, gameDificulty.enemyDiceAttack, gameDificulty.enemyWeapon);
+
+  print('Escolha a dificuldade do jogo.')
+  optionsBtn([
+    {
+      text: 'Fácil',
+      callback: easyGame,
+    },
+    {
+      text: 'Médio',
+      callback: mediumGame,
+    },
+    {
+      text: 'Difícil',
+      callback: hardGame,
+    },
+  ]);
 }
-
-setInterval(updateScroll, 100);
-
-// board.onscroll = function() {
-//   scrolled=true;
-// };

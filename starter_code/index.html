@@ -24,6 +24,8 @@
         <div class="navbar-nav">
           <a class="nav-item nav-link active" href="#game">Game <span class="sr-only">(current)</span></a>
           <a class="nav-item nav-link" href="#instrucoes">Instruções</a>
+          <a class="nav-item nav-link" href="#personagem">Personagem</a>
+          <a class="nav-item nav-link" href="#historia">História</a>
           <a class="nav-item nav-link" href="#desenvolvedora">Desenvolvedora</a>
           <a class="nav-item nav-link" href="#contato">Contato</a>
         </div>
@@ -35,10 +37,10 @@
           <img src="./images/logo_lg.png" alt="d&d" id="img-lg">
           <img src="./images/logo_md.png" alt="d&d" id="img-md">
         </div>
-        <div class="col-12 col-md-10 col-lg-8" id="board">
+        <div class="col-12 col-md-9" id="board">
           <p id="history"></p>
         </div>
-        <button type="button" class="btn btn-success col-12 col-md-8" id="advance">Avançar</button>
+        <button type="button" class="btn btn-success col-12 col-md-9" id="start" onclick="start()">Jogar</button>
         <h1 class="col-12" id="what">O que você quer fazer?</h1>
         <div class="container">
           <div id="options" class="row d-flex justify-content-center">
@@ -48,36 +50,63 @@
     </section>
     <section id="instrucoes" class="container">
       <div class="row d-flex justify-content-center">
-        <div class="col-12 col-md-10 col-lg-8">
+        <div class="col-12 col-md-9">
           <h1 class="text-center">Instruções</h1>
-          <p>Leia atentamente toda a história para jogar.</p>
+          <p>Esse jogo foi feito com base nos livros de D&D 5 edição e tem como objetivo simular a forma de jogar RPG de mesa, aonde tem um mestre que cria a históra e personagens que interferem no rumo da história e proporciona um desfecho original. Nesse caso, o mestre é desempenhado pela programação. </p>
 
-          <p>lacinia id augue id ornare. Maecenas ullamcorper porta bibendum. Phasellus pretium, erat sed tempor sagittis, justo nulla suscipit arcu, vitae pulvinar est sapien vitae felis. Donec in mauris vitae risus blandit dignissim eu in mi. Quisque vitae molestie lorem, vel egestas metus. Suspendisse ac eros consequat, venenatis odio ut, tempor nunc.</p>
+          <p>O jogo será narrado no quadro preto acima, aonde serão informados os detalhes da história e as consequências das suas ações. Cada sequência de fatos te dará opções de como agir. Escolha sabiamente.</p>
+
+          <p>Leia atentamente todo o conteúdo abaixo para ter uma melhor imersão no jogo e depois é só jogar.</p>
+        </div>
+      </div>
+    </section>
+    <section id="personagem" class="container">
+      <div class="row d-flex justify-content-center">
+        <div class="col-12 col-md-9">
+          <h1 class="text-center">A Personagem</h1>
+          <p>Ariel é uma humana ladina que vive vagando por diferentes vilas em busca de refúgio e aventuras remuneradas. Ela é especializada em agir furtivamente, resolver misterios e atacar precisamente seus inimigos com sua esguia rapieira.</p>
+
+          <p>De noite na taverna, batendo papo com o taverneiro, ele comenta que ouviu dizer que em Alberger estão contratando aventureiros. A última missão de Ariel rendeu um bom pagamento, mas ele já está quase no fim e ela então decide seguir rumo à essa vila verificar esse rumor.</p>
+        </div>
+      </div>
+    </section>
+    <section id="historia" class="container">
+      <div class="row d-flex justify-content-center">
+        <div class="col-12 col-md-9">
+          <h1 class="text-center">A História</h1>
+          <p>Ariel chega em Alberger e vai até a taverna da vila buscar mais informações sobre esse tal rumor. O taverneiro diz não saber de nada, o que é um tanto quanto inusitado. Mas, ao perguntar para um rapaz bebendo vinho na mesa ao lado do palco, ela descobre que, às vésperas da eleição, a filha mais velha do prefeito está desaparecida há três dias e o sequestrador enviou um bilhete pedindo uma imensa quantia de resgate. O prefeito está procurando aventureiros para resgatar a filha e descobrir a identidade do sequestrador.</p>
+          <p>Ela reserva um quarto para ela na taverna e, após se arrumar, vai em direção à casa do prefeito se candidatar para concluir essa missão.</p>
+          <p>O prefeito está visivelmente abatido. Parece que não dorme por vários dias. Apesar de triste, ele a recebe muito bem e fica feliz por finalmente aparecer alguém para resgatar sua filha.</p>
+          <p>Ele conta à Ariel que sua filha Beatrice foi vista pela última vez em casa. Ela tomou seu café da manhã na cozinha e disse à cozinheira que iria à igreja logo em seguida.</p>
+          <p>Ariel pergunta se o prefeito ou algum funcionário percebeu algo de diferente nesse dia e ele informa que o jardineiro disse que encontrou o portão dos fundos semi-aberto, mas a cozinheira disse ter aberto para dar comida ao mendigo que fica na igreja. Ela faz isso todos os dias, aparentemente.</p>
+          <p>Ela decide investigar o quarto da moça e acaba encontrando um diário escondido no fundo falso da penteadeira e na última folha está escrito "Eu não aguento mais ele me perseguindo. Não suporto mais tanta briga. Preciso dar um jeito nisso.". Ariel supõe que talvez Beatrice conhecesse o suspeito. Ela conversa com cada funcionário da casa em busca de mais pistas ou informações, mas nada de relevante surge disso.</p>
+          <p>Ariel resolve então investigar os fundos da casa e é assim que a aventura começa.</p>
         </div>
       </div>
     </section>
     <section id="desenvolvedora" class="container">
       <div class="row d-flex justify-content-center">
-        <div class="col-12 col-md-10 col-lg-8">
+        <div class="col-12 col-md-9">
           <h1 class="text-center">Desenvolvedora</h1>
-          <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Fusce aliquam, turpis non malesuada accumsan, odio est condimentum dolor, quis dignissim urna elit id lectus. Nulla at nulla in velit blandit sagittis. Sed condimentum elit non leo tempor placerat. Etiam lacinia sem a volutpat venenatis. Maecenas fringilla tempor nibh quis lacinia. In eleifend magna ac libero scelerisque, dictum faucibus ipsum porta. Aliquam erat volutpat.</p>
+          <p>Amante de RPG de mesa desde a infância, Julia Ramos apresenta sua versão web do jogo em seu primeiro projeto do bootcamp de desenvolvimento web na Ironhack.</p>
     
-          <p>lacinia id augue id ornare. Maecenas ullamcorper porta bibendum. Phasellus pretium, erat sed tempor sagittis, justo nulla suscipit arcu, vitae pulvinar est sapien vitae felis. Donec in mauris vitae risus blandit dignissim eu in mi. Quisque vitae molestie lorem, vel egestas metus. Suspendisse ac eros consequat, venenatis odio ut, tempor nunc.</p>
+          <p>Sua intenção é reproduzir a forma de jogar D&D da melhor maneira possível e proporcionar uma experiência semelhante ao jogo de mesa para os jogadores online.</p>
+
+          <p>Se o jogo despertar a curiosidade do jogador em conhecer a versão tradicional, o objetivo deste projeto estará concluído.</p>
         </div>
       </div>
     </section>
     <section id="contato" class="container">
       <div class="row d-flex justify-content-center">
-        <div class="col-12 col-md-10 col-lg-8">
+        <div class="col-12 col-md-9">
           <h1 class="text-center">Contato</h1>
-          <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Fusce aliquam, turpis non malesuada accumsan, odio est condimentum dolor, quis dignissim urna elit id lectus. Nulla at nulla in velit blandit sagittis. Sed condimentum elit non leo tempor placerat. Etiam lacinia sem a volutpat venenatis. Maecenas fringilla tempor nibh quis lacinia. In eleifend magna ac libero scelerisque, dictum faucibus ipsum porta. Aliquam erat volutpat.</p>
-    
-          <p>lacinia id augue id ornare. Maecenas ullamcorper porta bibendum. Phasellus pretium, erat sed tempor sagittis, justo nulla suscipit arcu, vitae pulvinar est sapien vitae felis. Donec in mauris vitae risus blandit dignissim eu in mi. Quisque vitae molestie lorem, vel egestas metus. Suspendisse ac eros consequat, venenatis odio ut, tempor nunc.</p>
+          <p>Caso queira entrar em contato, mande um email para juliaramosguedes@gmail.com</p>
         </div>
       </div>
     </section>
     <!-- Local JavaScript -->
     <script src="./src/script.js"></script>
+    <script src="./src/actions.js"></script>
     <script src="./src/plot.js"></script>
     <!-- Bootstrap JS -->
     <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>

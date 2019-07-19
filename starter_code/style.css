@@ -53,8 +53,8 @@ nav > a > img {
   display: block;
 }
 
-.btn {
-  margin: 10px 0;
+#start {
+  margin-top: 10px;
 }
 
 #instrucoes, #desenvolvedora, #contato {
