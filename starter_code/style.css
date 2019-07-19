@@ -2,8 +2,12 @@ nav > a > img {
   width: 70px;
 }
 
-#game > img {
-  width: 775px;
+#img-lg {
+  display: none;
+}
+
+#img-md {
+  width: 300px;
   margin: 0 0 15px;
 }
 
@@ -11,9 +15,9 @@ nav > a > img {
   border: 1px solid black;
   border-radius: 5px;
   background: black;
-  width: 750px;
   height: 300px;
   margin: 0 auto;
+  overflow-y:scroll;
 }
 
 #board > p {
@@ -22,20 +26,46 @@ nav > a > img {
   margin: 20px;
 }
 
-#what > h1 {
+#what {
   font-size: 2em;
   margin: 20px auto 10px;
+  display: block;
 }
-
+/* 
 .btn {
-  width: 250px;
-}
+  width: 20%;
+} */
 
 #instrucoes, #desenvolvedora, #contato {
-  width: 750px;
   margin: 50px auto;
 }
 
-#instrucoes > h1 {
+h1 {
   margin-bottom: 20px;
+}
+
+/* Medium devices (tablets, 768px and up) */
+@media (min-width: 768px) {
+  #img-lg {
+    width: 550px;
+    margin: 0 0 15px;
+    display: inline;
+  }
+  
+  #img-md {
+    display: none;
+  }
+}
+
+/* Large devices (desktops, 992px and up) */
+@media (min-width: 992px) {
+  #img-lg {
+    width: 775px;
+    margin: 0 0 15px;
+    display: inline;
+  }
+  
+  #img-md {
+    display: none;
+  }
 }
