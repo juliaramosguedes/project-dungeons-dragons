@@ -15,7 +15,7 @@
     <link rel="icon" type ="image/png" href="./images/icon.png">
   </head>
   <body>
-    <nav class="navbar navbar-expand-lg navbar-light bg-light">
+    <nav class="navbar fixed-top navbar-expand-lg navbar-light bg-light">
       <a class="navbar-brand"><img src="./images/logo_sm.png" alt="d&d"></a>
       <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavAltMarkup" aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
       <span class="navbar-toggler-icon"></span>
@@ -36,14 +36,12 @@
           <img src="./images/logo_md.png" alt="d&d" id="img-md">
         </div>
         <div class="col-12 col-md-10 col-lg-8" id="board">
-          <p id="text"></p>
+          <p id="history"></p>
         </div>
+        <button type="button" class="btn btn-success col-12 col-md-8" id="advance">Avançar</button>
         <h1 class="col-12" id="what">O que você quer fazer?</h1>
         <div class="container">
-          <div id="buttons" class="row d-flex justify-content-center">
-            <button type="button" class="btn btn-success col-12 col-md-2" id="first-option">First option</button>
-            <button type="button" class="btn btn-success col-12 col-md-2" id="second-option">Second option</button>
-            <button type="button" class="btn btn-success col-12 col-md-2" id="third-option">Third option</button>
+          <div id="options" class="row d-flex justify-content-center">
           </div>
         </div>
       </div>

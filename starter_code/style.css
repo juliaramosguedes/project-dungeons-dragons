@@ -11,6 +11,10 @@ nav > a > img {
   margin: 0 0 15px;
 }
 
+#game {
+  margin-top: 60px;
+}
+
 #board {
   border: 1px solid black;
   border-radius: 5px;
@@ -26,15 +30,32 @@ nav > a > img {
   margin: 20px;
 }
 
+/* width */
+::-webkit-scrollbar {
+  width: 15px;
+}
+
+/* Track */
+::-webkit-scrollbar-track {
+  box-shadow: inset 0 0 5px grey; 
+  border-radius: 5px;
+}
+
+/* Handle */
+::-webkit-scrollbar-thumb {
+  background: dimgray; 
+  border-radius: 5px;
+}
+
 #what {
   font-size: 2em;
   margin: 20px auto 10px;
   display: block;
 }
-/* 
+
 .btn {
-  width: 20%;
-} */
+  margin: 10px 0;
+}
 
 #instrucoes, #desenvolvedora, #contato {
   margin: 50px auto;
