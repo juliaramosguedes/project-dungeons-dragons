@@ -1,20 +1,38 @@
 const text = document.getElementById('text');
+const buffer = [];
+let isPrinting = false;
 
-function print(phrase) {
+function printBuffer() {
+  if (!buffer.length || isPrinting) {
+    return;
+  }
+
+  isPrinting = true;
+
+  const currentPhrase = buffer.shift();
   let i = 0;
-  text.innerHTML = '';
   const intervalId = setInterval(() => {
-    text.innerHTML += phrase[i];
+    text.innerHTML += currentPhrase[i];
     i++;
-    if (i > phrase.length - 1) {
-      text.innerHTML += '<br>';
-      clearInterval(intervalId);
+
+    if (i <= currentPhrase.length - 1) {
+      return;
     }
+
+    text.innerHTML += '<br>';
+    clearInterval(intervalId);
+    isPrinting = false;
+    printBuffer();
   }, 100);
 }
 
+function print(phrase) {
+  buffer.push(phrase);
+  printBuffer();
+}
+
 // print('essa é uma mensagem teste.');
-// print('esse é um segundo paragrafo.');
+// print('essa mensagem deveria ser printada na linha debaixo.');
 
 document.getElementById('first-option').onclick = () => {
   print('você clicou na primeira opção.');
@@ -25,6 +43,51 @@ function rollDice(sides) {
   print(`O número rolado no dado de ${sides} lados (d${sides}) foi ${roll}.`);
   return roll;
 }
+
+function optionsBtn(optionsArray) {
+  document.getElementById('buttons').innerHTML = '';
+
+  optionsArray.forEach((button) => {
+    let element = document.createElement('button');
+    element.type = 'button';
+    element.classList.add('btn', 'btn-success', 'col-12', 'col-md-2');
+    element.textContent = button.text || '';
+    element.onclick = () => {
+      button.callback(element);
+      element.setAttribute("disabled", "disabled");
+      // document.getElementById('buttons').innerHTML = '';
+    }; 
+
+    document.getElementById('buttons').appendChild(element);
+  });
+} 
+
+const Actions = {
+  fight: () => {
+    print('Eita!');
+  },
+  scape: () => {
+    print('Fugi');
+  },
+  negociate: () => {
+    print('Fala ae.');
+  },
+};
+
+optionsBtn([
+  {
+    text: 'lutar',
+    callback: Actions.fight,
+  },
+  {
+    text: 'lutar também',
+    callback: Actions.fight,
+  },
+  {
+    text: 'fugir',
+    callback: Actions.scape,
+  },
+]);
 
 // console.log(rollDice(6))
 
