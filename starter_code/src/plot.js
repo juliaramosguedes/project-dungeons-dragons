@@ -34,6 +34,8 @@ function start() {
     { text: 'Médio', callback: mediumGame },
     { text: 'Difícil', callback: hardGame },
   ]);
+
+  document.body.classList.add('playing');
 }
 
 function gameOver() {
@@ -87,6 +89,18 @@ function scape() {
     { text: 'Esperar', callback: wait },
     { text: 'Voltar', callback: comeBack },
     { text: 'Casa do prefeito', callback: mayorsHouse },
+  ]);
+}
+
+function surrender() {
+  print(`${player.name}: Aonde está a garota? Vamos! Me leve até ela.`);
+  print(`${enemy.name}: Ela está trancada lá no fundo. A chave está no meu bolso.`);
+  print(`${player.name}: Ela está viva? Por que você fez isso? Só por dinheiro?`)
+  print(`${enemy.name}: Ela está bem. Eu não faria mal a ela. O plano era mantê-la aqui até receber o resgate.`);
+
+  optionsBtn([
+    { text: 'Interrogar', callback: interrogate },
+    { text: 'Resgatar a garota', callback: rescue },
   ]);
 }
 
@@ -168,12 +182,9 @@ function negociate() {
   print(`${player.name}: Pare! Você não precisa morrer. Se renda e entregue a garota.`);
   print(`${enemy.name}: Mas... Quem é você? Ah... Não vale a pena morrer por nenhum dinheiro. Espere. Eu te levo até ela.`);
   print(`${player.name}: Jogue sua arma pra cá e coloque as mãos nas costas.`)
+  print('Você amarra as mãos do sequestrador.')
   print(`${enemy.name}: Arghhh...`);
   surrender();
-}
-
-function surrender() {
-
 }
 
 function wait() {

@@ -30,6 +30,24 @@ nav > a > img {
   margin: 20px;
 }
 
+#btn-start {
+  margin-top: 10px;
+  display: inline-block;
+}
+
+#btn-print-all {
+  margin-top: 10px;
+  display: none;
+}
+
+body.playing #btn-start {
+  display: none;
+}
+
+body.playing #btn-print-all {
+  display: inline-block;
+}
+
 /* width */
 ::-webkit-scrollbar {
   width: 15px;
@@ -51,13 +69,16 @@ nav > a > img {
   font-size: 2em;
   margin: 20px auto 10px;
   display: block;
+  display: none;
 }
 
-#start {
-  margin-top: 10px;
+body.playing #what {
+  display: block;
 }
 
-#instrucoes, #desenvolvedora, #contato {
+#instrucoes,
+#desenvolvedora,
+#contato {
   margin: 50px auto;
 }
 

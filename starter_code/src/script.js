@@ -1,12 +1,13 @@
 // DOM -----------------------------------------------------
-const history = document.getElementById('history');
 const options = document.getElementById('options');
 const board = document.getElementById('board');
+const history = document.getElementById('history');
 
 
 // HTML functions -----------------------------------------
 let buffer = [];
 let isPrinting = false;
+let printingInterval = 0;
 
 function printBuffer() {
   if (!buffer.length || isPrinting) {
@@ -15,21 +16,30 @@ function printBuffer() {
 
   isPrinting = true;
 
-  let currentPhrase = buffer.shift();
-  let i = 0;
-  const intervalId = setInterval(() => {
-    history.innerHTML += currentPhrase[i];
-    i++;
+  printingInterval = setInterval(() => {
+    let currentPhrase = buffer.shift();
 
-    if (i <= currentPhrase.length - 1) {
+    // Add last letter
+    history.innerHTML += currentPhrase.slice(0, 1);
+
+    // Keep board on bottom
+    board.scrollTop = board.scrollHeight;
+
+    if (currentPhrase.length > 1) {
+      buffer.unshift(currentPhrase.slice(1));
       return;
     }
 
+    // Add break line to next phrase
     history.innerHTML += '<br>';
-    clearInterval(intervalId);
+
+    // Finish printing
+    clearInterval(printingInterval);
     isPrinting = false;
+
+    // Do again, because we may have phrase on buffer
     printBuffer();
-  }, 1); // CORRIGIR PRA 60 MILISEGUNDOS -------------------------------------------------
+  }, 60); // CORRIGIR PRA 60 MILISEGUNDOS -------------------------------------------------
 }
 
 function print(phrase) {
@@ -37,6 +47,18 @@ function print(phrase) {
   printBuffer();
 }
 
+function printAll() {
+  clearInterval(printingInterval);
+  isPrinting = false;
+
+  for (let i = 0; i < buffer.length; i++) {
+    history.innerHTML += buffer[i] + '<br>';
+  }
+
+  // Keep board on bottom and clear buffer
+  board.scrollTop = board.scrollHeight;
+  buffer = [];
+}
 
 function optionsBtn(optionsArray) {
   options.innerHTML = '';
@@ -47,6 +69,7 @@ function optionsBtn(optionsArray) {
     option.classList.add('btn', 'btn-outline-success', 'col-12', 'col-md-3');
     option.textContent = element.text || '';
     option.onclick = () => {
+      printAll();
       element.callback(option);
       // option.setAttribute("disabled", "disabled"); ------ DELETAR ------
       // options.innerHTML = ''; ------ DELETAR ------
@@ -54,21 +77,6 @@ function optionsBtn(optionsArray) {
     options.appendChild(option);
   });
 }
-
-let scrolled = false;
-function updateScroll() {
-  if (!scrolled) {
-    board.scrollTop = board.scrollHeight;
-    scrolled = false;
-  }
-}
-
-setInterval(updateScroll, 100);
-
-// board.onscroll = function() {
-//   scrolled=true;
-// };
-
 
 // Game levels ----------------------------------------------
 const gameDificulties = {
