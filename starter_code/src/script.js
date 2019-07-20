@@ -5,7 +5,7 @@ const board = document.getElementById('board');
 
 
 // HTML functions -----------------------------------------
-const buffer = [];
+let buffer = [];
 let isPrinting = false;
 
 function printBuffer() {
@@ -15,7 +15,7 @@ function printBuffer() {
 
   isPrinting = true;
 
-  const currentPhrase = buffer.shift();
+  let currentPhrase = buffer.shift();
   let i = 0;
   const intervalId = setInterval(() => {
     history.innerHTML += currentPhrase[i];
@@ -29,7 +29,7 @@ function printBuffer() {
     clearInterval(intervalId);
     isPrinting = false;
     printBuffer();
-  }, 60);
+  }, 1); // CORRIGIR PRA 60 MILISEGUNDOS -------------------------------------------------
 }
 
 function print(phrase) {
@@ -120,8 +120,6 @@ function hardGame() {
 
 
 // Game functions ------------------------------------------
-let days = 0;
-
 function rollDice(sides) {
   const roll = Math.ceil(Math.random() * sides);
   print(`O número rolado no dado de ${sides} lados (d${sides}) foi ${roll}.`);
@@ -202,6 +200,7 @@ class Character {
       }
     } else {
       print(`${this.name} se esforçou muito e por fim acabou desistindo, mas voltou no dia seguinte para tentar novamente.`);
+      plot.days++
       this.habilityChances = gameDificulty.habilityChances;
     }
     return check;
@@ -211,26 +210,3 @@ class Character {
 let player = new Character('Ariel', 10, 8, 'rapieira');
 let enemy = new Character('Sequestrador', gameDificulty.enemyhitPoints, gameDificulty.enemyDiceAttack, gameDificulty.enemyWeapon);
 let daughter = new Character('Beatrice', 10, 4, 'adaga');
-
-
-// Start Game ----------------------------------------------
-function start() {
-  player = new Character('Ariel', 10, 8, 'rapieira');
-  enemy = new Character('Sequestrador', gameDificulty.enemyhitPoints, gameDificulty.enemyDiceAttack, gameDificulty.enemyWeapon);
-
-  print('Escolha a dificuldade do jogo.')
-  optionsBtn([
-    {
-      text: 'Fácil',
-      callback: easyGame,
-    },
-    {
-      text: 'Médio',
-      callback: mediumGame,
-    },
-    {
-      text: 'Difícil',
-      callback: hardGame,
-    },
-  ]);
-}
