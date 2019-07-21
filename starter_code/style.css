@@ -48,6 +48,11 @@ body.playing #btn-print-all {
   display: inline-block;
 }
 
+#options > .btn {
+  /* border: none; */
+  /* margin: 10px; */
+}
+
 /* width */
 ::-webkit-scrollbar {
   width: 15px;
