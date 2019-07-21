@@ -48,9 +48,9 @@ body.playing #btn-print-all {
   display: inline-block;
 }
 
-#options > .btn {
+.btn {
   /* border: none; */
-  /* margin: 10px; */
+  margin: 10px;
 }
 
 /* width */
