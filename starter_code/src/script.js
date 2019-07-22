@@ -199,7 +199,7 @@ class Character {
     let check = false;
     if (this.habilityChances > 0) {
       check = d20Check();
-      if (check) {
+      if (check === 'critical' || check === true) {
         print(`${this.name} passou no teste.`);
         this.habilityChances = gameDificulty.habilityChances;
       } else {
