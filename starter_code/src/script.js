@@ -71,8 +71,6 @@ function optionsBtn(optionsArray) {
     option.onclick = () => {
       printAll();
       element.callback(option);
-      // option.setAttribute("disabled", "disabled"); ------ DELETAR ------
-      // options.innerHTML = ''; ------ DELETAR ------
     };
     options.appendChild(option);
   });
@@ -162,7 +160,6 @@ class Character {
     this.weapon = weapon;
     this.life = true;
     this.habilityChances = gameDificulty.habilityChances;
-    this.currentLocation = 'casa do prefeito';
   }
 
   attack() {
