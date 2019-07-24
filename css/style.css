@@ -80,9 +80,7 @@ body.playing #what {
   display: block;
 }
 
-#instrucoes,
-#desenvolvedora,
-#contato {
+.post {
   margin: 50px auto;
 }
 
