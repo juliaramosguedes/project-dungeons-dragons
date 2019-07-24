@@ -5,6 +5,7 @@ const plot = {
     tavernMan: false,
     mayor: false,
   },
+  negociate: false,
   surrender: false,
 } 
 
@@ -44,7 +45,7 @@ function winBattle() {
   if (!enemy.life) {
     print('Parabéns! Você venceu a batalha.');
     optionsBtn([
-      { text: 'Resgatar a garota', callback: rescue },
+      { text: 'Resgatar', callback: rescue },
     ]);
   }
 }
@@ -60,7 +61,7 @@ function begin() {
 
   optionsBtn([
     { text: 'Abrir cadeado', callback: roguesTools },
-    { text: 'Arrombar portão', callback: breakGate },
+    { text: 'Arrombar', callback: breakGate },
   ]);
 }
 
@@ -78,7 +79,7 @@ function scape() {
   // plot.scapeBattle = true;
   print('Você usa ação ardilosa para desengajar e dispara para bem longe. Depois um tempo correndo, você encontra um arbusto para se esconder.');
 
-  if (days > 0) daughter.life = false;
+  if (plot.days > 0) daughter.life = false;
 
   optionsBtn([
     { text: 'Esperar', callback: wait },
@@ -95,7 +96,7 @@ function surrender() {
 
   optionsBtn([
     { text: 'Interrogar', callback: interrogate },
-    { text: 'Resgatar a garota', callback: rescue },
+    { text: 'Resgatar', callback: rescue },
   ]);
 }
 
@@ -116,7 +117,7 @@ function roguesTools() {
 
 function breakGate() {
   print('Você dá uma distância do portão e corre com toda sua velocidade, se jogando contra o portão.');
-  print('O portão caiu com o impacto, fazendo um estrondoso barulho.');
+  print('O portão cai com o impacto, fazendo um estrondoso barulho.');
   print('Passos apressados são ouvidos. Parece estar vindo alguém. Não tem onde se esconder. Não dá tempo.');
   foundKidnapper();
 }
@@ -168,10 +169,18 @@ function fight() {
 
 function negociate() {
   if (enemy.hitPoints > (gameDificulty.enemyhitPoints / 2)) {
-    print(`${player.name}: Calma. Vamos conversar. Eu vim pela garota. Liberte-a e eu não te machucarei.`);
-    print(`${enemy.name}: Garota? Não sei do que está falando. E quem você pensa que é, insolente? Você, me machucar? HAHAHAHAHA! Que piada. Você vai pagar por ter se metido no que não devia!`);
-    fight();
-    return;
+    if (!plot.negociate) {
+      plot.negociate = true;
+      print(`${player.name}: Calma. Vamos conversar. Eu vim pela garota. Liberte-a e eu não te machucarei.`);
+      print(`${enemy.name}: Garota? Não sei do que está falando. E quem você pensa que é, insolente? Você, me machucar? HAHAHAHAHA! Que piada. Você vai pagar por ter se metido no que não devia!`);
+      fight();
+      return;
+    } else {
+      print(`${enemy.name}: Cale a boca e lute!`);
+      fight();
+      return;
+    }
+    
   }
 
   print(`${player.name}: Pare! Você não precisa morrer. Se renda e entregue a garota.`);
@@ -200,7 +209,7 @@ function rescue() {
     print('Está trancada. Você chama por Beatrice.');
     print('Beatrice: Socorro! Por favor, me salva.');
     print('Ariel: Aguenta só mais um pouco, Beatrice. Eu vou te tirar daí.');
-    print('Você não poupa esforços e tempo, até finalmente destrancar a porta. Você encontra uma garota de longos cabelos pretos e pele branca como a lua. Você a reconhece de um quadro na casa do prefeito. É a Beatrice.');
+    print('Você não poupa esforços e tempo, até finalmente destrancar a porta. Você encontra uma garota de longos cabelos pretos e pele branca como a lua. Você a reconhece de um quadro na casa do prefeito. É mesmo a Beatrice.');
     mayorsHouse();
   }
 }
@@ -218,7 +227,7 @@ function comeBack() {
       print('Está dando certo. O fluxo de sangue diminuiu. Você conversa com Beatrice e tenta a manter acordada. Habilmente, você identifica as ervas e faz todo o procedimento para fechar o ferimento. Após um tempo, Beatrice recobra a consciência.');
       
       optionsBtn([
-        { text: 'Casa do prefeito', callback: mayorsHouse },
+        { text: 'Casa', callback: mayorsHouse },
       ]);
       
     } else {
@@ -234,13 +243,13 @@ function comeBack() {
 }
 
 function daughterDead() {
-  print('O sequestrador fugiu. A Beatrice está morta. Só te resta voltar à casa do prefeito para entregar o corpo de sua filha, para que ele possa ser apropriadamente velado.');
+  print('O sequestrador fugiu. A Beatrice está morta. Só te resta voltar à casa do prefeito para entregar o corpo de sua filha, para que ele possa ser velado.');
   print('Não foi dessa vez.');
   gameOver();
 }
 
 function interrogate() {
-  print(`${player.name}: Me conta mais sobre esse plano. E pense muito bem antes de mentir. Por quê você a sequestrou? Fale por bem ou por mal.`);
+  print(`${player.name}: Me conta mais sobre esse plano. E pense muito bem antes de mentir. Por quê você a sequestrou?`);
   print(`Você pega uma adaga, segura a mão do sequestrador e ameaça enfiar a ponta da adaga embaixo da unha de um dos dedos dele.`);
 
   const check = player.hability();
@@ -255,14 +264,14 @@ function interrogate() {
   }
 
   optionsBtn([
-    { text: 'Resgatar a garota', callback: rescue },
+    { text: 'Resgatar', callback: rescue },
   ]);
 }
 
 function mayorsHouse() {
   print('Você volta à cidade e leva Beatrice de volta à sua casa. Ela finalmente está segura.')
   print('O prefeito te recebe. Primeiro, perplexo, depois feliz. Ele corre até Beatrice e a abraça.')
-  print('Prefeito: Minha filha, você está bem??? Graças à Deus! Rezei tanto pra te que você voltasse. Ariel, não tenho como te agradecer. Vamos, entrem, por favor.')
+  print('Prefeito: Minha filha, você está bem??? Graças à Deus! Rezei tanto pra que você voltasse. Ariel, não tenho como te agradecer. Vamos, entrem, por favor.')
   print('Você e o prefeito conversam sobre toda a missão.')
 
   if (plot.clues.tavernMan) {

@@ -19,7 +19,7 @@ nav > a > img {
   border: 1px solid black;
   border-radius: 5px;
   background: black;
-  height: 250px;
+  height: 200px;
   margin: 0 auto;
   overflow-y:scroll;
 }
@@ -49,8 +49,7 @@ body.playing #btn-print-all {
 }
 
 .btn {
-  /* border: none; */
-  margin: 10px;
+  margin: 5px;
 }
 
 /* width */
@@ -102,6 +101,10 @@ h1 {
   #img-md {
     display: none;
   }
+
+  .btn {
+    margin: 10px;
+  }
 }
 
 /* Large devices (desktops, 992px and up) */
@@ -110,9 +113,5 @@ h1 {
     width: 775px;
     margin: 0 0 15px;
     display: inline;
-  }
-  
-  #img-md {
-    display: none;
   }
 }

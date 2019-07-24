@@ -39,7 +39,7 @@ function printBuffer() {
 
     // Do again, because we may have phrase on buffer
     printBuffer();
-  }, 60); // CORRIGIR PRA 60 MILISEGUNDOS -------------------------------------------------
+  }, 60);
 }
 
 function print(phrase) {
@@ -66,7 +66,7 @@ function optionsBtn(optionsArray) {
   optionsArray.forEach((element) => {
     let option = document.createElement('button');
     option.type = 'button';
-    option.classList.add('btn', 'btn-success', 'col-12', 'col-md-3');
+    option.classList.add('btn', 'btn-success', 'col-10', 'col-md-2');
     option.textContent = element.text || '';
     option.onclick = () => {
       printAll();
