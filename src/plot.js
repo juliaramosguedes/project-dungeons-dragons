@@ -24,7 +24,7 @@ function start() {
 
   print('Para uma melhor experiência, leia os artigos abaixo antes de jogar.');
   print('Escolha a dificuldade do jogo.');
-  optionsBtn([
+  btnBuffer.push([
     { text: 'Fácil', callback: easyGame },
     { text: 'Médio', callback: mediumGame },
     { text: 'Difícil', callback: hardGame },
@@ -36,7 +36,7 @@ function start() {
 function gameOver() {
   if (!player.life || !daughter.life) {
     print('GAME OVER');
-    optionsBtn([
+    btnBuffer.push([
       { text: 'Jogar de novo', callback: start },
     ]);
   }
@@ -45,7 +45,7 @@ function gameOver() {
 function winBattle() {
   if (!enemy.life) {
     print('Parabéns! Você venceu a batalha.');
-    optionsBtn([
+    btnBuffer.push([
       { text: 'Resgatar', callback: rescue },
     ]);
   }
@@ -60,7 +60,7 @@ function begin() {
   print('Você resolve seguir as pegadas e, após andar por 1 hora e meia floresta à dentro, as pegadas desaparecem.')
   print('Você acha isso suspeito e vasculha o entorno, até que encontra uma especie de caverna com um portão trancado com cadeado. O portão não parece estar nas melhores condições.')
 
-  optionsBtn([
+  btnBuffer.push([
     { text: 'Abrir cadeado', callback: roguesTools },
     { text: 'Arrombar', callback: breakGate },
   ]);
@@ -69,7 +69,7 @@ function begin() {
 function foundKidnapper() {
   print(`${enemy.name}: Quem é você? O que está fazendo aqui? Saia já daqui ou irá se arrepender!`)
 
-  optionsBtn([
+  btnBuffer.push([
     { text: 'Lutar', callback: fight },
     { text: 'Negociar', callback: negociate },
     { text: 'Fugir', callback: scape },
@@ -82,7 +82,7 @@ function scape() {
 
   if (plot.days > 0) daughter.life = false;
 
-  optionsBtn([
+  btnBuffer.push([
     { text: 'Esperar', callback: wait },
     { text: 'Voltar', callback: comeBack },
   ]);
@@ -95,7 +95,7 @@ function surrender() {
   print(`${enemy.name}: Ela está bem. Eu não faria mal a ela. O plano era mantê-la aqui até receber o resgate.`);
   plot.surrender = true;
 
-  optionsBtn([
+  btnBuffer.push([
     { text: 'Interrogar', callback: interrogate },
     { text: 'Resgatar', callback: rescue },
   ]);
@@ -196,7 +196,7 @@ function wait() {
   daughter.life = false;
   print('Você espera por aproximadamente meia hora e ao longe avista o que parece ser o sequestrador correndo para dentro da mata fechada.');
 
-  optionsBtn([
+  btnBuffer.push([
     { text: 'Voltar', callback: comeBack },
   ]);
 }
@@ -227,7 +227,7 @@ function comeBack() {
     if (check) {
       print('Está dando certo. O fluxo de sangue diminuiu. Você conversa com Beatrice e tenta a manter acordada. Habilmente, você identifica as ervas e faz todo o procedimento para fechar o ferimento. Após um tempo, Beatrice recobra a consciência.');
       
-      optionsBtn([
+      btnBuffer.push([
         { text: 'Casa', callback: mayorsHouse },
       ]);
       
@@ -264,7 +264,7 @@ function interrogate() {
     print(`Não precisa disso! Por favor. Eu fiz por dinheiro. Só isso. Não me machuque.`)
   }
 
-  optionsBtn([
+  btnBuffer.push([
     { text: 'Resgatar', callback: rescue },
   ]);
 }
@@ -283,7 +283,7 @@ function mayorsHouse() {
   }
 
   print('GAME OVER');
-  optionsBtn([
+  btnBuffer.push([
     { text: 'Jogar de novo', callback: start },
   ]);
 }

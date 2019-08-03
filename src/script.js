@@ -8,6 +8,7 @@ const history = document.getElementById('history');
 let buffer = [];
 let isPrinting = false;
 let printingInterval = 0;
+let btnBuffer = [];
 
 function printBuffer() {
   if (!buffer.length || isPrinting) {
@@ -36,9 +37,15 @@ function printBuffer() {
     // Finish printing
     clearInterval(printingInterval);
     isPrinting = false;
-
+    
     // Do again, because we may have phrase on buffer
     printBuffer();
+
+    // After printing all buffer
+    if (!buffer.length) {
+      afterPrint();
+    }
+    
   }, 60);
 }
 
@@ -55,9 +62,19 @@ function printAll() {
     history.innerHTML += buffer[i] + '<br>';
   }
 
+  afterPrint();
+
   // Keep board on bottom and clear buffer
   board.scrollTop = board.scrollHeight;
   buffer = [];
+}
+
+function afterPrint() {
+  displayBtn()
+}
+
+function displayBtn() {
+  optionsBtn(btnBuffer[btnBuffer.length-1])
 }
 
 function optionsBtn(optionsArray) {
@@ -71,6 +88,7 @@ function optionsBtn(optionsArray) {
     option.onclick = () => {
       printAll();
       element.callback(option);
+      options.innerHTML = '';
     };
     options.appendChild(option);
   });
