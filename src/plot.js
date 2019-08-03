@@ -22,6 +22,7 @@ function start() {
 
   history.innerHTML = '';
 
+  print('Para uma melhor experiência, leia os artigos abaixo antes de jogar.');
   print('Escolha a dificuldade do jogo.');
   optionsBtn([
     { text: 'Fácil', callback: easyGame },
