@@ -25,7 +25,7 @@ O objetivo de ter criado o jogo é despertar a curiosidade do jogador em conhece
 
 ## O Jogo
 
-Para jogar, clique no link abaixo.
+Para jogar, acesse o link.
 https://juliaramosguedes.github.io/project-dd/
 
 ## Contato
