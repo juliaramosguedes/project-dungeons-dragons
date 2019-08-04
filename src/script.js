@@ -193,7 +193,7 @@ class Character {
       return 30;
     }
 
-    if (check === true) {
+    if (check) {
       print(`${this.name} acertou o golpe de ${this.weapon}.`);
       return rollDice(this.diceAttack);
     // eslint-disable-next-line no-else-return
@@ -214,13 +214,16 @@ class Character {
     let check = false;
     if (this.habilityChances > 0) {
       check = d20Check();
-      if (check === 'critical' || check === true) {
-        print(`${this.name} passou no teste.`);
-        this.habilityChances = gameDificulty.habilityChances;
-      } else {
+
+      if (check === 'fail' || !check) {
         this.habilityChances--;
         print('Não foi dessa vez.');
+        check = false;
+      } else {
+        print(`${this.name} passou no teste.`);
+        this.habilityChances = gameDificulty.habilityChances;
       }
+
     } else {
       print(`${this.name} se esforçou muito e por fim acabou desistindo, mas voltou no dia seguinte para tentar novamente.`);
       plot.days++
